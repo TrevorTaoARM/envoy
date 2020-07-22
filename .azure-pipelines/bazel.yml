@@ -44,7 +44,7 @@ steps:
     displayName: "Enable IPv6"
     condition: ${{ parameters.managedAgent }}
 
-  - script: ci/run_envoy_docker.sh 'ci/do_ci.sh ${{ parameters.ciTarget }}'
+  - script: ci/run_envoy_docker.sh 'ci/do_ci.sh ${{ parameters.ciTarget }} //test/common/common:base64_test'
     workingDirectory: $(Build.SourcesDirectory)
     env:
       ENVOY_DOCKER_BUILD_DIR: $(Build.StagingDirectory)

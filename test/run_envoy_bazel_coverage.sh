@@ -32,6 +32,8 @@ fi
 
 bazel coverage ${BAZEL_BUILD_OPTIONS} ${COVERAGE_TARGETS}
 
+strings bazel-bin/external/envoy/bazel/foreign_cc/nghttp2/lib/libnghttp2.a | grep nghttp2_frame.c
+
 # Collecting profile and testlogs
 [[ -z "${ENVOY_BUILD_PROFILE}" ]] || cp -f "$(bazel info output_base)/command.profile.gz" "${ENVOY_BUILD_PROFILE}/coverage.profile.gz" || true
 [[ -z "${ENVOY_BUILD_DIR}" ]] || find bazel-testlogs/ -name test.log | tar zcf "${ENVOY_BUILD_DIR}/testlogs.tar.gz" -T -
@@ -84,3 +86,5 @@ if [[ "$VALIDATE_COVERAGE" == "true" ]] && [[ "{FUZZ_COVERAGE}" == "false" ]]; t
 fi
 
 echo "HTML coverage report is in ${COVERAGE_DIR}/index.html"
+
+
